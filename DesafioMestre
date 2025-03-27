@@ -1,0 +1,233 @@
+#include <stdio.h>
+
+#define TORRE_STEPS 5
+#define BISPO_STEPS 5
+#define RAINHA_STEPS 8
+#define CAVALO_UP 2
+#define CAVALO_RIGHT 1
+
+// Protótipos das funções recursivas
+void mover_torre_cima(int passo);
+void mover_torre_baixo(int passo);
+void mover_torre_direita(int passo);
+void mover_torre_esquerda(int passo);
+
+void mover_bispo_superior_direita(int passo);
+void mover_bispo_superior_esquerda(int passo);
+void mover_bispo_inferior_direita(int passo);
+void mover_bispo_inferior_esquerda(int passo);
+
+void mover_rainha_esquerda(int passo);
+void mover_rainha_direita(int passo);
+void mover_rainha_cima(int passo);
+void mover_rainha_baixo(int passo);
+
+int main() {
+    int peca = 0, direcao;
+
+    printf("DIGITE O NÚMERO DA PEÇA QUE IRÁ MOVIMENTAR\n");
+    printf("1 - Torre;\n");
+    printf("2 - Bispo;\n");
+    printf("3 - Rainha;\n");
+    printf("4 - Cavalo;\n");
+    scanf("%d", &peca);
+
+    switch (peca) {
+        case 1: // Torre (recursividade)
+            printf("Move-se em linha reta horizontalmente ou verticalmente. Escolha a direção do movimento:\n");
+            printf("1 - Cima;\n");
+            printf("2 - Baixo;\n");
+            printf("3 - Direita;\n");
+            printf("4 - Esquerda;\n");
+            scanf("%d", &direcao);
+
+            switch (direcao) {
+                case 1:
+                    mover_torre_cima(1);
+                    break;
+                case 2:
+                    mover_torre_baixo(1);
+                    break;
+                case 3:
+                    mover_torre_direita(1);
+                    break;
+                case 4:
+                    mover_torre_esquerda(1);
+                    break;
+                default:
+                    printf("Opção Inválida\n");
+                    break;
+            }
+            printf("\n");
+            break;
+
+        case 2: // Bispo (recursividade e loops aninhados)
+            printf("Move-se na diagonal. Escolha a direção do movimento:\n");
+            printf("1 - Diagonal Superior Direita;\n");
+            printf("2 - Diagonal Superior Esquerda;\n");
+            printf("3 - Diagonal Inferior Direita;\n");
+            printf("4 - Diagonal Inferior Esquerda;\n");
+            scanf("%d", &direcao);
+
+            switch (direcao) {
+                case 1:
+                    mover_bispo_superior_direita(1);
+                    break;
+                case 2:
+                    mover_bispo_superior_esquerda(1);
+                    break;
+                case 3:
+                    mover_bispo_inferior_direita(1);
+                    break;
+                case 4:
+                    mover_bispo_inferior_esquerda(1);
+                    break;
+                default:
+                    printf("Opção Inválida\n");
+                    break;
+            }
+            printf("\n");
+            break;
+
+        case 3: // Rainha (recursividade)
+            printf("Move-se em todas as direções. Escolha a direção do movimento:\n");
+            printf("1 - Esquerda;\n");
+            printf("2 - Direita;\n");
+            printf("3 - Cima;\n");
+            printf("4 - Baixo;\n");
+            scanf("%d", &direcao);
+
+            switch (direcao) {
+                case 1:
+                    mover_rainha_esquerda(1);
+                    break;
+                case 2:
+                    mover_rainha_direita(1);
+                    break;
+                case 3:
+                    mover_rainha_cima(1);
+                    break;
+                case 4:
+                    mover_rainha_baixo(1);
+                    break;
+                default:
+                    printf("Opção Inválida\n");
+                    break;
+            }
+            printf("\n");
+            break;
+
+        case 4: // Cavalo (loops aninhados)
+            printf("Movimento do Cavalo:\n");
+            printf("O Cavalo se move duas casas para cima e uma casa para a direita.\n");
+
+            for (int i = 0; i < (CAVALO_UP + CAVALO_RIGHT); i++) {
+                for (int j = 0; j < 1; j++) {
+                    if (i < CAVALO_UP) {
+                        printf("Cima\n");
+                    } else {
+                        printf("Direita\n");
+                    }
+                }
+            }
+            printf("\n");
+            break;
+
+        default:
+            printf("Opção Inválida\n");
+            break;
+    }
+
+    return 0;
+}
+
+// Funções recursivas para a Torre
+void mover_torre_cima(int passo) {
+    if (passo > TORRE_STEPS) return;
+    printf("Cima\n");
+    mover_torre_cima(passo + 1);
+}
+
+void mover_torre_baixo(int passo) {
+    if (passo > TORRE_STEPS) return;
+    printf("Baixo\n");
+    mover_torre_baixo(passo + 1);
+}
+
+void mover_torre_direita(int passo) {
+    if (passo > TORRE_STEPS) return;
+    printf("Direita\n");
+    mover_torre_direita(passo + 1);
+}
+
+void mover_torre_esquerda(int passo) {
+    if (passo > TORRE_STEPS) return;
+    printf("Esquerda\n");
+    mover_torre_esquerda(passo + 1);
+}
+
+// Funções recursivas para o Bispo com loops aninhados
+void mover_bispo_superior_direita(int passo) {
+    if (passo > BISPO_STEPS) return;
+    for (int i = 0; i < 1; i++) { // Vertical
+        for (int j = 0; j < 1; j++) { // Horizontal
+            printf("Cima, Direita\n");
+        }
+    }
+    mover_bispo_superior_direita(passo + 1);
+}
+
+void mover_bispo_superior_esquerda(int passo) {
+    if (passo > BISPO_STEPS) return;
+    for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Cima, Esquerda\n");
+        }
+    }
+    mover_bispo_superior_esquerda(passo + 1);
+}
+
+void mover_bispo_inferior_direita(int passo) {
+    if (passo > BISPO_STEPS) return;
+    for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Baixo, Direita\n");
+        }
+    }
+    mover_bispo_inferior_direita(passo + 1);
+}
+
+void mover_bispo_inferior_esquerda(int passo) {
+    if (passo > BISPO_STEPS) return;
+    for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Baixo, Esquerda\n");
+        }
+    }
+    mover_bispo_inferior_esquerda(passo + 1);
+}
+
+// Funções recursivas para a Rainha
+void mover_rainha_esquerda(int passo) {
+    if (passo > RAINHA_STEPS) return;
+    printf("Esquerda\n");
+    mover_rainha_esquerda(passo + 1);
+}
+
+void mover_rainha_direita(int passo) {
+    if (passo > RAINHA_STEPS) return;
+    printf("Direita\n");
+    mover_rainha_direita(passo + 1);
+}
+
+void mover_rainha_cima(int passo) {
+    if (passo > RAINHA_STEPS) return;
+    printf("Cima\n");
+    mover_rainha_cima(passo + 1);
+}
+
+void mover_rainha_baixo(int passo) {
+    if (passo > RAINHA_STEPS) return;
+    printf("Baixo\n");
+    mover_rainha_baixo(passo + 1);
+}
